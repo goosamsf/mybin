@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cat /Users/jun/bin/reference_doc/main.cpp > $(pwd)/$1
+
+
+
+
+
+
+

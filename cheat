@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+OPT=`echo "$2"`
+if [ -z $2 ]; then
+	grep $1 /Users/jun/bin/cheat_doc/${1}.md | bat
+else
+	grep $1 /Users/jun/bin/cheat_doc/${1}.md | grep -- "$OPT"
+fi
