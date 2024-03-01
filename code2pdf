@@ -1,0 +1,38 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then
+  echo "Usage : $(basename $0) file1 file2 ..."
+  exit -1
+fi
+echo "Converting given source code(s) into pdf(s) ..."
+
+for var in $@
+do
+  ARGS_NAME=$(echo $var | cut -d "." -f1)
+  ARGS_EXT=$(echo $var | cut -d "." -f2)
+  case $ARGS_EXT in
+    c)
+      echo "Converting c file ..."
+      ;;
+    sh)
+      echo "Converting bash script ..."
+      ;;
+    *)
+      echo "Unknown File Extension skip ..."
+      continue
+      ;;
+  esac
+  enscript --color --highlight=$ARGS_EXT -o $ARGS_NAME.ps $ARGS_NAME.$ARGS_EXT
+    
+    if [ $? -eq 0 ]; then
+      ps2pdf $ARGS_NAME.ps
+      echo "Conversion Success"
+      echo "Removing ps file ..."
+      rm $ARGS_NAME.ps
+      echo "done ..."
+    else
+      echo "Something Went Wrong"
+    fi
+done
+

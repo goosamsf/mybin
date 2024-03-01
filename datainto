@@ -1,0 +1,25 @@
+#!/bin/bash
+ANS="y"
+read -p "Enter output file name : " FNAME
+while [ $ANS = "y" ] 
+do
+	read -p "Enter the name of CSV file : " CSVF
+	TNAME=$(echo $CSVF | sed 's/\..*//')
+	gsed -i 's/\r//' $CSVF
+	gsed -i 's/\s//g' $CSVF
+	read FL < $CSVF
+
+	while read p; do
+		QUO=$(echo $p | sed 's/[^,]*/"&"/g')
+		QUO2=$(echo $QUO | sed -r 's/"([0-9]*)"/\1/g')
+		echo "insert into $TNAME ($FL) VALUES($QUO2);" >> temp.csv 
+	done < $CSVF
+
+	gsed -i '1d' temp.csv
+	cat temp.csv >> $FNAME
+	rm temp.csv
+
+	read -p "Are there more to insert ?  (y/n)" ANS
+done
+echo "done."
+
