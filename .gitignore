@@ -2,7 +2,6 @@
 *.cpp
 *.txt
 .n2nd
-myscripts
 wfpass
 cheatdoc
 templates

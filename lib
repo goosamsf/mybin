@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FILE=$1
+SUBJECT=$2
+DOCPATH=/Users/jun/bin/libdoc
+echo Hello world $FILE and $SUBJECT and $DOCPATH

@@ -2,7 +2,8 @@
 
 ps > temp00.txt
 nl=$(expr $(cat temp00.txt | wc -l) - 1)
-output1=$(cat temp00.txt | tail -n $nl | awk '{print $1, $4}' | fzf | cut -d " " -f1) 2>/dev/null
+output1=$(cat temp00.txt | tail -n $nl | awk '{print $1, $4}'\
+                         | fzf | cut -d " " -f1) 2>/dev/null
 
 kill $output1 2>/dev/null
 echo Killed $output1 done. 

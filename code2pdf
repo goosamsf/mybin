@@ -14,16 +14,26 @@ do
   case $ARGS_EXT in
     c)
       echo "Converting c file ..."
+      HIGHLIGHT=c
+      ;;
+    py)
+      echo "converting python file..."
+      HIGHLIGHT=python
+      ;;
+    go)
+      echo "Converting go file..."
+      HIGHLIGHT=go
       ;;
     sh)
       echo "Converting bash script ..."
+      HIGHLIGHT=sh
       ;;
     *)
       echo "Unknown File Extension skip ..."
       continue
       ;;
   esac
-  enscript --color --highlight=$ARGS_EXT -o $ARGS_NAME.ps $ARGS_NAME.$ARGS_EXT
+  enscript --color --highlight=$HIGHLIGHT -o $ARGS_NAME.ps $ARGS_NAME.$ARGS_EXT
     
     if [ $? -eq 0 ]; then
       ps2pdf $ARGS_NAME.ps
